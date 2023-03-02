@@ -1,15 +1,15 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { FilesController } from '../controller/FilesController';
+import { FileController } from '../controller/FileController';
 import { multerConfig } from '../config/multer';
 
-const filesController = new FilesController();
+const fileController = new FileController();
 
 const filesRouter = Router();
 
 const upload = multer(multerConfig);
 
-filesRouter.post('/', upload.single('file'), filesController.create);
+filesRouter.post('/', upload.single('file'), fileController.create);
 
 export { filesRouter }

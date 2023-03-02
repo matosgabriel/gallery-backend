@@ -2,7 +2,7 @@ import { File } from '@prisma/client';
 import { Request, Response } from 'express';
 import { CreateFileService } from '../services/CreateFileService';
 
-class FilesController {
+class FileController {
   public async create(request: Request, response: Response): Promise<Response | void> {
     const data = request.file;
 
@@ -20,4 +20,4 @@ class FilesController {
   }
 }
 
-export { FilesController }
+export { FileController }
