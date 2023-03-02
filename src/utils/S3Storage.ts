@@ -4,6 +4,7 @@ import mime from 'mime';
 import fs from 'fs';
 
 import { multerConfig } from '../config/multer';
+import { AppError } from '../error/AppError';
 
 class S3Storage {
   private client: S3;
@@ -19,7 +20,7 @@ class S3Storage {
     const ContentType = mime.getType(originalPath);
 
     if (!ContentType) {
-      throw new Error('File not found');
+      throw new AppError('File not found.', 404);
     }
 
     const fileContent = await fs.promises.readFile(originalPath);
@@ -33,7 +34,7 @@ class S3Storage {
         ContentType,
       }).promise();
     } catch (err) {
-      throw new Error('Failed to upload the file.');
+      throw new AppError('Failed to upload the file.', 500);
     }
 
     await fs.promises.unlink(originalPath);

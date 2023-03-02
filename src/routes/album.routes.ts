@@ -8,5 +8,6 @@ const albumRoutes = Router();
 
 albumRoutes.post('/', albumController.create);
 albumRoutes.get('/', albumController.list);
+albumRoutes.delete('/', albumController.delete);
 
 export { albumRoutes }

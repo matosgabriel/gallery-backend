@@ -10,8 +10,9 @@ class CreateFileService {
   public async execute({ filename }: CreateFileServiceData): Promise<File> {
     const s3Storage = new S3Storage();
 
-    await s3Storage.saveFile(filename);
+    await s3Storage.saveFile(filename); // Upload file to AWS S3
 
+    // Define the AWS S3 file url
     const url = `https://${process.env.AWS_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
 
     const newFile = await prismaClient.file.create({
