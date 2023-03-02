@@ -8,23 +8,23 @@ datasource db {
 }
 
 model File {
-  id         String       @id @unique @default(uuid())
+  id         String      @id @unique @default(uuid())
   name       String
   url        String
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
-  AlbumPhoto AlbumPhoto[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  AlbumFile  AlbumFile[]
 }
 
 model Album {
-  id         String       @id @unique @default(uuid())
+  id         String      @id @unique @default(uuid())
   name       String
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
-  AlbumPhoto AlbumPhoto[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  AlbumFile  AlbumFile[]
 }
 
-model AlbumPhoto {
+model AlbumFile {
   id         String   @id @unique @default(uuid())
   album_id   String
   album      Album    @relation(fields: [album_id], references: [id])

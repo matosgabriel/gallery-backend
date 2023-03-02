@@ -15,8 +15,7 @@ class FileController {
     else
       throw new Error('Missing file.');
 
-    const { name, url, created_at, updated_at } = newFile;
-    return response.json({ name, url, created_at, updated_at });
+    return response.json(newFile);
   }
 }
 

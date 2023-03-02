@@ -1,7 +1,7 @@
-import { Album } from '@prisma/client';
 import { Request, Response } from "express";
 
 import { CreateAlbumService } from '../services/CreateAlbumService';
+import { ListAlbumService } from '../services/ListAlbumService';
 
 class AlbumController {
   public async create(request: Request, response: Response): Promise<Response | void> {
@@ -9,9 +9,17 @@ class AlbumController {
 
     const createAlbumService = new CreateAlbumService();
 
-    const { name, created_at, updated_at } = await createAlbumService.execute(albumName);
+    const newAlbum = await createAlbumService.execute(albumName);
 
-    return response.json({ name, created_at, updated_at });
+    return response.json(newAlbum);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response | void> {
+    const listAlbumService = new ListAlbumService();
+
+    const albumList = await listAlbumService.execute();
+
+    return response.json(albumList);
   }
 }
 
