@@ -1,3 +1,4 @@
+import { File } from '@prisma/client';
 import { Request, Response } from 'express';
 import { CreateFileService } from '../services/CreateFileService';
 
@@ -7,12 +8,15 @@ class FilesController {
 
     const createFileService = new CreateFileService();
 
+    let newFile: File;
+
     if (data)
-      await createFileService.execute({ filename: data.filename });
+      newFile = await createFileService.execute({ originalName: data.originalname, filename: data.filename });
     else
       throw new Error('Missing file.');
 
-    return response.json({ data });
+    const { name, url, created_at, updated_at } = newFile;
+    return response.json({ name, url, created_at, updated_at });
   }
 }
 
