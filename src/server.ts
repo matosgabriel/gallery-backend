@@ -7,4 +7,4 @@ server.use(express.json());
 
 server.use(appRoutes);
 
-server.listen(3333, () => console.log('Running at 3333!'));
+server.listen(3333, () => console.log('Running at 3333! 🚀'));

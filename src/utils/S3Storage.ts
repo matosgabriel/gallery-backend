@@ -10,7 +10,7 @@ class S3Storage {
 
   constructor() {
     this.client = new aws.S3({
-      region: 'us-east-2',
+      region: process.env.AWS_REGION,
     });
   }
 
@@ -24,13 +24,17 @@ class S3Storage {
 
     const fileContent = await fs.promises.readFile(originalPath);
 
-    await this.client.putObject({
-      Bucket: 'matosgabriel-gallery',
-      Key: filename,
-      ACL: 'public-read',
-      Body: fileContent,
-      ContentType,
-    }).promise();
+    try {
+      await this.client.putObject({
+        Bucket: process.env.AWS_BUCKET || 'matosgabriel-gallery',
+        Key: filename,
+        ACL: 'public-read',
+        Body: fileContent,
+        ContentType,
+      }).promise();
+    } catch (err) {
+      throw new Error('Failed to upload the file.');
+    }
 
     await fs.promises.unlink(originalPath);
   }

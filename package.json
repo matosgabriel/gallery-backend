@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev --transpile-only --no-warnings --ignore-watch node_modules src/server.ts",
     "up": "docker-compose up -d",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",

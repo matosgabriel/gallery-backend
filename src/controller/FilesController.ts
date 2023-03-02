@@ -11,7 +11,7 @@ class FilesController {
     let newFile: File;
 
     if (data)
-      newFile = await createFileService.execute({ originalName: data.originalname, filename: data.filename });
+      newFile = await createFileService.execute({ filename: data.filename });
     else
       throw new Error('Missing file.');
 
