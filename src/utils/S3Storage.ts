@@ -39,6 +39,17 @@ class S3Storage {
 
     await fs.promises.unlink(originalPath);
   }
+
+  async deleteFile(filename: string): Promise<void> {
+    try {
+      await this.client.deleteObject({
+        Bucket: process.env.AWS_BUCKET || 'matosgabriel-gallery',
+        Key: filename,
+      }).promise();
+    } catch (err) {
+      throw new AppError('Failed to delete the file.', 500);
+    }
+  }
 }
 
 export { S3Storage }

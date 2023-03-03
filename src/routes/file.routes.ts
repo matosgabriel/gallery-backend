@@ -11,5 +11,6 @@ const filesRouter = Router();
 const upload = multer(multerConfig);
 
 filesRouter.post('/', upload.single('file'), fileController.create);
+filesRouter.delete('/', fileController.delete);
 
 export { filesRouter }
