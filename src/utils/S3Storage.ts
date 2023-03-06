@@ -1,4 +1,4 @@
-import aws, { S3 } from 'aws-sdk';
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import path from 'path';
 import mime from 'mime';
 import fs from 'fs';
@@ -7,10 +7,10 @@ import { multerConfig } from '../config/multer';
 import { AppError } from '../error/AppError';
 
 class S3Storage {
-  private client: S3;
+  private client: S3Client;
 
   constructor() {
-    this.client = new aws.S3({
+    this.client = new S3Client({
       region: process.env.AWS_REGION,
     });
   }
@@ -26,13 +26,13 @@ class S3Storage {
     const fileContent = await fs.promises.readFile(originalPath);
 
     try {
-      await this.client.putObject({
+      await this.client.send(new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET || 'matosgabriel-gallery',
         Key: filename,
         ACL: 'public-read',
         Body: fileContent,
         ContentType,
-      }).promise();
+      }));
     } catch (err) {
       throw new AppError('Failed to upload the file.', 500);
     }
@@ -42,10 +42,10 @@ class S3Storage {
 
   async deleteFile(filename: string): Promise<void> {
     try {
-      await this.client.deleteObject({
+      await this.client.send(new DeleteObjectCommand({
         Bucket: process.env.AWS_BUCKET || 'matosgabriel-gallery',
         Key: filename,
-      }).promise();
+      }));
     } catch (err) {
       throw new AppError('Failed to delete the file.', 500);
     }
