@@ -1,5 +1,8 @@
 node_modules
 # Keep environment variables out of version control
 .env
-tmp/*
 dist
+
+# Keep tmp folder in repository but empty
+tmp/*
+!tmp/.gitkeep
