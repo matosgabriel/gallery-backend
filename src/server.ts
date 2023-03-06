@@ -19,4 +19,6 @@ server.use((error: Error, request: Request, response: Response, _: NextFunction)
   return response.status(500).json({ status: 'error', message: 'Internal server error.' });
 });
 
-server.listen(3333, () => console.log('Running at 3333! 🚀'));
+server.listen(process.env.PORT || 3333, () =>
+  console.log(`HTTP Server running at ${process.env.PORT || 3333}! 🚀`)
+);
