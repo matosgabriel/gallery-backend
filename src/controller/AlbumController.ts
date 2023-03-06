@@ -11,7 +11,7 @@ class AlbumController {
 
     const createAlbumService = new CreateAlbumService();
 
-    const newAlbum = await createAlbumService.execute(albumName);
+    await createAlbumService.execute(albumName);
 
     return response.status(201).send();
   }
@@ -26,7 +26,7 @@ class AlbumController {
 
   public async delete(request: Request, response: Response): Promise<Response | void> {
     const query = request.query;
-    const album_id = query.album_id;
+    const album_id = query.id;
 
     if (!album_id) throw new AppError('Album identificator not given.', 409);
 
