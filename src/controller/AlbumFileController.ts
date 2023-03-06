@@ -10,7 +10,7 @@ class AlbumFileController {
 
     const newAlbumFile = await createAlbumService.execute({ file_id, album_id });
 
-    return response.json(newAlbumFile);
+    return response.status(201).send();
   }
 }
 

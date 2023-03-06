@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { filesRouter } from './file.routes';
-import { albumRoutes } from './album.routes';
-import { albumFileRoutes } from './albumFile.routes';
+import { filesRouter } from './files.routes';
+import { albumRoutes } from './albums.routes';
+import { albumFileRoutes } from './albumFiles.routes';
 
 const appRoutes = Router();
 
-appRoutes.use('/file', filesRouter);
-appRoutes.use('/album', albumRoutes);
-appRoutes.use('/albumFile', albumFileRoutes);
+appRoutes.use('/files', filesRouter);
+appRoutes.use('/albums', albumRoutes);
+appRoutes.use('/albumFiles', albumFileRoutes);
 
 export { appRoutes }

@@ -14,19 +14,19 @@ class FileController {
     const createFileService = new CreateFileService();
     const newFile = await createFileService.execute(data.filename);
 
-    return response.json(newFile);
+    return response.status(201).send();
   }
 
   public async delete(request: Request, response: Response): Promise<Response | void> {
     const query = request.query;
     const file_id = query.file_id;
 
-    if (!file_id) throw new AppError('Identificator not provided.', 409);
+    if (!file_id) throw new AppError('Identificator not provided.', 409); // Ensure file_id was given
 
     const deleteFileService = new DeleteFileService();
     await deleteFileService.execute(file_id.toString());
 
-    return response.json({ message: 'File successfully deleted.' });
+    return response.send();
   }
 }
 

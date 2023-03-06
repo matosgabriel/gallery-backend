@@ -13,15 +13,15 @@ class AlbumController {
 
     const newAlbum = await createAlbumService.execute(albumName);
 
-    return response.json(newAlbum);
+    return response.status(201).send();
   }
 
   public async list(request: Request, response: Response): Promise<Response | void> {
     const listAlbumService = new ListAlbumService();
 
-    const albumList = await listAlbumService.execute();
+    const albums = await listAlbumService.execute();
 
-    return response.json(albumList);
+    return response.json({ albums });
   }
 
   public async delete(request: Request, response: Response): Promise<Response | void> {
@@ -33,7 +33,7 @@ class AlbumController {
     const deleteAlbumService = new DeleteAlbumService();
     await deleteAlbumService.execute(album_id.toString());
 
-    return response.json({ message: 'Album successfully deleted.' });
+    return response.send();
   }
 }
 
