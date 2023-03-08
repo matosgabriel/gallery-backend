@@ -13,6 +13,7 @@ class AlbumController {
 
     await createAlbumService.execute(albumName);
 
+    console.log(`nome do novo album = ${albumName}`);
     return response.status(201).send();
   }
 
@@ -26,12 +27,12 @@ class AlbumController {
 
   public async delete(request: Request, response: Response): Promise<Response | void> {
     const query = request.query;
-    const album_id = query.id;
+    const albumId = query.id;
 
-    if (!album_id) throw new AppError('Album identificator not given.', 409);
+    if (!albumId) throw new AppError('Album identificator not given.', 409);
 
     const deleteAlbumService = new DeleteAlbumService();
-    await deleteAlbumService.execute(album_id.toString());
+    await deleteAlbumService.execute(albumId.toString());
 
     return response.send();
   }

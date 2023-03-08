@@ -2,10 +2,10 @@ import multer from 'multer';
 import crypto from 'crypto';
 import path from 'path';
 
+export const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'tmp'); // Define the temp folder as files destination
-  },
+  destination: tmpFolder,
   filename: (req, file, cb) => {
     const extension = file.originalname.split('.')[1]; // Get the file extension
 
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const multerConfig = {
-  directory: path.resolve(__dirname, '..', '..', 'tmp'),
+  directory: tmpFolder,
   storage
 }
 

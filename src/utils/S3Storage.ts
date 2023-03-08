@@ -3,7 +3,7 @@ import path from 'path';
 import mime from 'mime';
 import fs from 'fs';
 
-import { multerConfig } from '../config/multer';
+import { multerConfig, tmpFolder } from '../config/multer';
 import { AppError } from '../error/AppError';
 
 class S3Storage {
@@ -16,8 +16,10 @@ class S3Storage {
   }
 
   async saveFile(filename: string): Promise<void> {
-    const originalPath = path.resolve(multerConfig.directory, filename);
+    const originalPath = path.resolve(tmpFolder, filename);
     const ContentType = mime.getType(originalPath);
+
+    console.log(`tmpFolder: ${tmpFolder}`);
 
     if (!ContentType) {
       throw new AppError('File not found.', 404);
