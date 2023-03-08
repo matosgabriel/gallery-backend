@@ -19,8 +19,6 @@ class S3Storage {
     const originalPath = path.resolve(tmpFolder, filename);
     const ContentType = mime.getType(originalPath);
 
-    console.log(`tmpFolder: ${tmpFolder}`);
-
     if (!ContentType) {
       throw new AppError('File not found.', 404);
     }
