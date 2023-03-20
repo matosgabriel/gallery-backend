@@ -8,4 +8,4 @@ Backend repository for gallery project, developed with NodeJS and Typescript.
 ## Execute project
 ```docker-compose up -d```
 
-That's all! Automatically the docker-compose generates the api and database containers, providing the localhost ports linking with containers ports
+That's all! Automatically the docker-compose generates the api and database containers, providing the localhost ports linking with containers ports.
